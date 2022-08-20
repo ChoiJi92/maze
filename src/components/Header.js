@@ -50,6 +50,7 @@ width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 3;
 `;
 const Head = styled.div`
   width: 100%;
@@ -60,14 +61,15 @@ const Head = styled.div`
   align-items: center;
   border: 1px solid;
   .logo {
-    width: 11%;
-    height: 69px;
+    width: 15%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-right: 5rem;
     img {
       width: 100%;
+      height: auto;
     }
   }
   .mainNav {
@@ -76,12 +78,12 @@ const Head = styled.div`
       flex-direction: row;
       list-style: none;
       color: #bbb;
-      font-size: 1.3rem;
+      font-size: 1rem;
       font-weight: 800;
       padding-left: 0px;
       word-break: keep-all;
       li {
-        margin-left: 5.8rem;
+        margin-left: 4rem;
       }
     }
   }
@@ -95,7 +97,7 @@ const Head = styled.div`
 
     button {
       width: 66px;
-      height: 30px;
+      height: 22px;
       background-color: transparent;
       border: none;
       display: flex;
@@ -103,7 +105,7 @@ const Head = styled.div`
       justify-content: space-around;
       align-items: center;
       span {
-        width: 1.8rem;
+        width: 1.3rem;
         height: 2px;
         background-color: white;
         border: 1px solid white;
@@ -116,9 +118,10 @@ const Head = styled.div`
       flex-direction: row;
       list-style: none;
       color: #bbb;
-      font-size: 1.3rem;
+      font-size: 1rem;
       font-weight: 800;
       padding-left: 0px;
+      word-break: keep-all;
       li {
         margin-left: 2.9rem;
       }
