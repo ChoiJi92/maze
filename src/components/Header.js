@@ -2,17 +2,23 @@ import React from "react";
 import styled from "styled-components";
 import logo from "../assets/images/logo.webp";
 import searchIcon from "../assets/images/icon-search-small.webp";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate()
   return (
     <Container>
       <Head>
         <div className="logo">
-          <img src={logo} alt="로고"></img>
+          <img src={logo} alt="로고" onClick={()=>{
+            navigate('/')
+          }}></img>
         </div>
         <div className="mainNav">
           <ul>
-            <li style={{ marginLeft: "0" }}>모델</li>
+            <li style={{ marginLeft: "0" }} onClick={()=>{
+              navigate('/highlight')
+            }}>모델</li>
             <li>구매</li>
             <li>체험</li>
             <li>멤버스</li>
@@ -70,6 +76,7 @@ const Head = styled.div`
     img {
       width: 100%;
       height: auto;
+      cursor: pointer;
     }
   }
   .mainNav {
@@ -84,6 +91,10 @@ const Head = styled.div`
       word-break: keep-all;
       li {
         margin-left: 4rem;
+        cursor: pointer;
+        :hover{
+          color: white;
+        }
       }
     }
   }
@@ -104,6 +115,7 @@ const Head = styled.div`
       flex-direction: column;
       justify-content: space-around;
       align-items: center;
+      cursor: pointer;
       span {
         width: 1.3rem;
         height: 2px;
@@ -124,6 +136,10 @@ const Head = styled.div`
       word-break: keep-all;
       li {
         margin-left: 2.9rem;
+        cursor: pointer;
+        :hover{
+          color: white;
+        }
       }
     }
   }
@@ -135,6 +151,7 @@ const Head = styled.div`
     img {
       width: 20px;
       height: 20px;
+      cursor: pointer;
     }
   }
 `;
