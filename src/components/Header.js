@@ -31,7 +31,9 @@ const Header = ({ top}) => {
             <li>구매</li>
             <li>체험</li>
             <li>멤버스</li>
-            <li>제네시스</li>
+            <li onClick={() => {
+              navigate("/brand");
+            }}>제네시스</li>
           </ul>
         </div>
         <div className="subNav">
