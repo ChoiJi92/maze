@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Brand from "./pages/Brand";
 import Highlight from "./pages/Highlight";
 import Main from "./pages/Main";
+import Test from "./components/Notice";
 
 function App() {
   return (
