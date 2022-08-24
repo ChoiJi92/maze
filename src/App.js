@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="App">
       <GlobalStyles />
-      <Header></Header>
+      {/* <Header></Header> */}
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/highlight" element={<Highlight />} />

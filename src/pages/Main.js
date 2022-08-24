@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Navigation, Pagination, Autoplay } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -17,9 +17,50 @@ import OurModels from "../components/OurModels";
 import Design from "../components/Design";
 import GenesisEvents from "../components/GenesisEvents";
 import Contents from "../components/Contents";
+import { IoPause } from "react-icons/io5";
+import { IoPlay } from "react-icons/io5";
+import Header from "../components/Header";
+function SlideButton() {
+  const swiper = useSwiper();
+  const [play, setPlay] = useState(true);
+  return (
+    <div
+      style={{
+        width: "100%",
+        position: 'absolute',
+        display: 'flex',
+        justifyContent:'center',
+        bottom:'45px',
+        left: '8%',
+        color:'white',
+        zIndex:'3'
+      }}
+    >
+      {play ? (
+        <IoPause
+          style={{ cursor: "pointer", fontSize: "1.3rem" }}
+          onClick={() => {
+            swiper.autoplay.stop();
+            setPlay(false);
+          }}
+        />
+      ) : (
+        <IoPlay
+          style={{ cursor: "pointer", fontSize: "1.3rem" }}
+          onClick={() => {
+            swiper.autoplay.start();
+            setPlay(true);
+          }}
+        />
+      )}
+    </div>
+  );
+}
+
 const Main = () => {
   return (
     <>
+    <Header top={true}/>
       <Container>
         <SwiperWrap
           modules={[Navigation, Pagination, Autoplay]}
@@ -168,13 +209,14 @@ const Main = () => {
               </div>
             </Wrap>
           </SwiperSlide>
+          <SlideButton/>
         </SwiperWrap>
       </Container>
-      <OurModels/>
+      <OurModels />
       <IconLinks />
-      <Design/>
-      <GenesisEvents/>
-      <Contents/>
+      <Design />
+      <GenesisEvents />
+      <Contents />
     </>
   );
 };
@@ -182,6 +224,7 @@ const Main = () => {
 const Container = styled.div`
   width: 100%;
   padding-top: 70px;
+  position: relative;
   cursor: grab;
   .swiper-pagination {
     display: flex;
@@ -244,7 +287,7 @@ const Wrap = styled.div`
     height: 8%;
     border-top: 3px solid white;
     border-bottom: 3px solid white;
-    margin-bottom: 150px;
+    margin-bottom: 15%;
   }
   .bottom {
     display: flex;

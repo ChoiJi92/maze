@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import arrow from "../assets/images/ico-small-arrow-down.webp";
 import genesis from "../assets/images/genesis-kr-overview-gv80-kv-image-11-desktop-2560x900-ko.jpg";
@@ -18,10 +18,36 @@ import IconLinks from "../components/IconLinks";
 import Contents2 from "../components/Contents2";
 import PageLink from "../components/PageLink";
 import Connect from "../components/Connect";
+import Header from "../components/Header";
 const Highlight = () => {
+  const [isScroll, setIsScroll] = useState(false);
+  const throttle = (callback, delay) => {
+    let timer = null;
+    return () => {
+      if (timer) return;
+      timer = setTimeout(() => {
+        callback();
+        timer = null;
+      }, delay);
+    };
+  };
+  const updateScroll = () => {
+    const { scrollY } = window;
+    const isScrolled = scrollY > 0;
+    setIsScroll(isScrolled);
+  };
+  const handleScroll = throttle(updateScroll, 100);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
     <>
-      <Head>
+    <Header top={false}/>
+      <Head isScroll={isScroll}>
         <div className="left">GV80</div>
         <div className="middle">
           <ul>
@@ -75,44 +101,49 @@ const Highlight = () => {
         </div>
       </Wrap>
       <Quote>
-              <div>
-              * 본 페이지에서 소개되는 상품의 디자인, 색상, 특성, 사양 등은 참고용이며 실제 제품과 다를 수 있습니다.
-              </div>
+        <div>
+          * 본 페이지에서 소개되는 상품의 디자인, 색상, 특성, 사양 등은
+          참고용이며 실제 제품과 다를 수 있습니다.
+        </div>
       </Quote>
       <Spec>
-            <div className="title">GV80 SPECIFICATIONS</div>
-            <div className="more">
-              <span>전체 사양 보기</span>
-              <div></div>
-            </div>
+        <div className="title">GV80 SPECIFICATIONS</div>
+        <div className="more">
+          <span>전체 사양 보기</span>
+          <div></div>
+        </div>
       </Spec>
-      <Hslide/>
-      <Bigquote/>
-      <Gallery/>
-      <Gallery2/>
-      <Accordion/>
-      <Video/>
-      <Video2/>
-      <Video3/>
-      <Performance/>
-      <Video4/>
-      <General/>
-      <General2/>
-      <IconLinks/>
-      <Contents2/>
-      <PageLink/>
-      <Connect/>
+      <Hslide />
+      <Bigquote />
+      <Gallery />
+      <Gallery2 />
+      <Accordion />
+      <Video />
+      <Video2 />
+      <Video3 />
+      <Performance />
+      <Video4 />
+      <General />
+      <General2 />
+      <IconLinks />
+      <Contents2 />
+      <PageLink />
+      <Connect />
     </>
   );
 };
 const Head = styled.div`
   background-color: #151515;
   border-bottom: 1px solid #1e1e1e;
-  padding: 70px 120px 0 120px;
-  height: 130px;
+  padding: 0 120px;
+  height: 60px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  position: ${(props) => (props.isScroll ? "fixed" : "none")};
+  top: ${(props) => (props.isScroll ? "0" : "none")};
+  z-index: ${(props) => (props.isScroll ? "6" : "0")};
+  width: 100%;
   .left {
     color: white;
     font-weight: 700;
@@ -245,18 +276,17 @@ const Wrap = styled.div`
       height: 29px;
       @keyframes arrow {
         0% {
-          
           opacity: 1;
         }
         50% {
           transform: translateY(10px) rotate(45deg);
-          opacity:0.5;
+          opacity: 0.5;
         }
         100% {
           opacity: 0;
         }
       }
-     
+
       button {
         width: 0.7rem;
         height: 0.7rem;
@@ -277,28 +307,28 @@ const Quote = styled.div`
   background-color: black;
   display: flex;
   justify-content: center;
-  div{
+  div {
     text-align: center;
     width: 38%;
-    color: #CCCCCC;
+    color: #cccccc;
     margin-top: 18px;
     font-size: 0.95rem;
     font-weight: 500;
   }
-`
+`;
 const Spec = styled.div`
-height: 266px;
-background-color: black;
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-.title{
-  color: white;
-  font-size: 1.5rem;
-  margin-right: 100px;
-}
-.more {
+  height: 266px;
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  .title {
+    color: white;
+    font-size: 1.5rem;
+    margin-right: 100px;
+  }
+  .more {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -332,5 +362,5 @@ align-items: center;
       rotate: 45deg;
     }
   }
-`
+`;
 export default Highlight;

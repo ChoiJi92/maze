@@ -1,9 +1,36 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import Header from "./Header";
 
 const BHeader = () => {
-    return (
-        <Wrap>
+  const [isScroll, setIsScroll] = useState(false);
+  const throttle = (callback, delay) => {
+    let timer = null;
+    return () => {
+      if (timer) return;
+      timer = setTimeout(() => {
+        callback();
+        timer = null;
+      }, delay);
+    };
+  };
+  const updateScroll = () => {
+    const { scrollY } = window;
+    const isScrolled = scrollY > 0;
+    setIsScroll(isScrolled);
+  };
+  const handleScroll = throttle(updateScroll, 100);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  return (
+    <>
+      <Header top={false} />
+      <Wrap isScroll={isScroll}>
         <div className="left">브랜드</div>
         <div className="middle">
           <ul>
@@ -20,16 +47,21 @@ const BHeader = () => {
           </ul>
         </div>
       </Wrap>
-    );
+    </>
+  );
 };
 const Wrap = styled.div`
+  width: 100%;
   background-color: #151515;
   border-bottom: 1px solid #1e1e1e;
-  padding: 70px 120px 0 120px;
-  height: 130px;
+  padding: 0 120px;
+  height: 60px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  top: 0;
+  position: ${(props) => (props.isScroll ? "fixed" : "none")};
+  z-index: ${(props) => (props.isScroll ? "6" : "0")};
   .left {
     color: white;
     font-weight: 700;

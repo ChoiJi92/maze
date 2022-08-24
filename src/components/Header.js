@@ -4,21 +4,30 @@ import logo from "../assets/images/logo.webp";
 import searchIcon from "../assets/images/icon-search-small.webp";
 import { useNavigate } from "react-router-dom";
 
-const Header = () => {
-  const navigate = useNavigate()
+const Header = ({ top}) => {
+  const navigate = useNavigate();
   return (
-    <Container>
+    <Container top={top}>
       <Head>
         <div className="logo">
-          <img src={logo} alt="로고" onClick={()=>{
-            navigate('/')
-          }}></img>
+          <img
+            src={logo}
+            alt="로고"
+            onClick={() => {
+              navigate("/");
+            }}
+          ></img>
         </div>
         <div className="mainNav">
           <ul>
-            <li style={{ marginLeft: "0" }} onClick={()=>{
-              navigate('/highlight')
-            }}>모델</li>
+            <li
+              style={{ marginLeft: "0" }}
+              onClick={() => {
+                navigate("/highlight");
+              }}
+            >
+              모델
+            </li>
             <li>구매</li>
             <li>체험</li>
             <li>멤버스</li>
@@ -46,10 +55,9 @@ const Header = () => {
 };
 
 const Container = styled.div`
-width: 100%;
+  width: 100%;
   height: 70px;
-  position: fixed;
-  top: 0;
+  position: ${(props) => (props.top ? "fixed" : "none")};
   border-bottom: 1px solid #1e1e1e;
   background-color: black;
   padding: 0 120px;
@@ -92,7 +100,7 @@ const Head = styled.div`
       li {
         margin-left: 4rem;
         cursor: pointer;
-        :hover{
+        :hover {
           color: white;
         }
       }
@@ -137,7 +145,7 @@ const Head = styled.div`
       li {
         margin-left: 2.9rem;
         cursor: pointer;
-        :hover{
+        :hover {
           color: white;
         }
       }

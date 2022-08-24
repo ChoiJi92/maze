@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Navigation, Pagination, Autoplay } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -12,6 +12,44 @@ import back4 from "../assets/images/genesis-kr-overview-gv80-interior-gallery-im
 import back5 from "../assets/images/genesis-kr-overview-gv80-interior-gallery-image-06-desktop-1920x1080-en.jpg";
 import { TiArrowForward } from "react-icons/ti";
 import { IoPause } from "react-icons/io5";
+import { IoPlay } from "react-icons/io5";
+function SlideButton() {
+  const swiper = useSwiper();
+  const [play, setPlay] = useState(true);
+  return (
+    <div
+      style={{
+        width: "100%",
+        position: 'absolute',
+        display: 'flex',
+        justifyContent:'center',
+        bottom:'35px',
+        left: '6%',
+        color:'white',
+        zIndex:'3'
+      }}
+    >
+      {play ? (
+        <IoPause
+          style={{ cursor: "pointer", fontSize: "1.3rem" }}
+          onClick={() => {
+            swiper.autoplay.stop();
+            setPlay(false);
+          }}
+        />
+      ) : (
+        <IoPlay
+          style={{ cursor: "pointer", fontSize: "1.3rem" }}
+          onClick={() => {
+            swiper.autoplay.start();
+            setPlay(true);
+          }}
+        />
+      )}
+    </div>
+  );
+}
+
 
 const Hslide = () => {
   const backList = [
@@ -64,6 +102,7 @@ const Hslide = () => {
             </Wrap>
           </SwiperSlide>
         ))}
+        <SlideButton/>
       </SwiperWrap>
     </Container>
   );
