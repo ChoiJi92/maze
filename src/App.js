@@ -17,7 +17,7 @@ function App() {
         <Route path="/highlight" element={<Highlight />} />
         <Route path="/brand" element={<Brand/>} />
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
