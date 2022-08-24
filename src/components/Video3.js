@@ -1,16 +1,16 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { Navigation, Pagination } from "swiper";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { Swiper, SwiperSlide} from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { IoPause } from "react-icons/io5";
 import { IoPlay } from "react-icons/io5";
 import video from "../assets/images/genesis-kr-overview-gv80-active-road-noise-control-19-desktop-940x900-ko.webm";
-import back from "../assets/images/genesis-kr-overview-gv80-quadlamps-14-desktop-940x900-ko.webp";
+import back from "../assets/images/genesis-kr-overview-gv80-genesis-digital-key-21-desktop-940x900-ko.webp";
+
 const Accordion = () => {
-  const swiper = useSwiper();
   const mySlide = useRef(null);
   const videoRef = useRef();
   const [play, setPlay] = useState(true);
@@ -47,6 +47,7 @@ const Accordion = () => {
             navigation
             pagination={{ clickable: true }}
             ref={mySlide}
+            className="mySwiper"
           >
             <SwiperSlide>
               <Image>
@@ -83,7 +84,6 @@ const Accordion = () => {
               <span
                 onClick={() => {
                   setDecNum(v.className);
-                  swiper.slideTo(i);
                 }}
               >
                 {v.title}
@@ -119,14 +119,7 @@ const Wrap = styled.div`
       justify-content: center;
       align-items: center;
     }
-    .swiper-pagination-bullet.swiper-pagination-bullet-active {
-      border: 2px solid white;
-      background-color: transparent;
-      width: 0.7rem;
-      height: 0.7rem;
-      cursor: pointer;
-    }
-    .swiper-pagination-bullet {
+    .swiper-pagination-bullets {
       display: none;
     }
     .swiper-button-prev {
